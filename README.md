@@ -67,28 +67,7 @@ Dashboard bisnis dibuat untuk membantu Jaya Jaya Institut memonitor performa dan
 - Distribusi nilai akademik per status mahasiswa
 - Korelasi antar faktor akademik dan sosio-ekonomi
 
-Data siap pakai untuk dashboard tersedia di file **`dashboard_data.csv`** (hasil olahan dari `data.csv`, sudah ditambah label yang mudah dibaca seperti `Gender_label`, `Scholarship_label`, `Tuition_paid_label`).
-
-**Cara membuat dashboard (pilih salah satu):**
-
-**Opsi A — Looker Studio (disarankan, tanpa Docker):**
-1. Buka [Looker Studio](https://lookerstudio.google.com/), buat laporan baru.
-2. Pilih sumber data **File Upload**, unggah `dashboard_data.csv`.
-3. Buat visualisasi: pie/bar chart `Status`, bar chart dropout rate per `Scholarship_label`/`Tuition_paid_label`, histogram nilai semester per status, dsb (lihat referensi visual pada `model/eda_*.png` dan `model/dashboard_overview.png` hasil notebook).
-4. Klik **Share** → **Publish to web / Get link**, salin link, lalu tempel di bagian ini:
-   **Link Dashboard: `[isi link Looker Studio Anda di sini]`**
-
-**Opsi B — Metabase (sesuai instruksi submission):**
-1. Jalankan Metabase melalui Docker, lalu buat akun dengan email `root@mail.com` dan password `root123`.
-2. Hubungkan Metabase ke database (import `dashboard_data.csv` atau gunakan database instance sesuai instruksi submission).
-3. Setelah dashboard selesai dibuat, ekspor database instance Metabase dengan perintah:
-   ```bash
-   docker cp metabase.db.mv.db metabase-container:/metabase.db.mv.db
-   ```
-   Simpan file `metabase.db.mv.db` di folder proyek ini.
-   **Link Dashboard (jika menggunakan Tableau Public / akses lain): `[isi di sini]`**
-
-> **Catatan:** Screenshot referensi hasil eksplorasi data yang bisa dijadikan acuan visual dashboard tersedia di folder `model/` (`dashboard_overview.png`, `eda_status_distribution.png`, `eda_scholarship_tuition.png`, `eda_grade_distribution.png`, `eda_correlation.png`).
+   **Link Dashboard (Streamlit): `[https://projectdicoding.streamlit.app/]`**
 
 ---
 
