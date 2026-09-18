@@ -72,17 +72,11 @@ Dashboard bisnis dibuat **khusus untuk keperluan monitoring** (bukan untuk melak
 **🔗 Link Dashboard (Looker Studio, dapat diakses & divalidasi langsung oleh reviewer):**
 **https://datastudio.google.com/reporting/06d899db-0289-480f-be82-451eab95e6b3**
 
-> Pastikan akses dashboard sudah diatur ke **"Anyone with the link" (Viewer)** melalui tombol Share di Looker Studio, agar reviewer dapat membukanya tanpa perlu meminta izin akses.
-
-**Cara memverifikasi dashboard:**
-1. Buka link Looker Studio di atas — dashboard akan langsung menampilkan seluruh visualisasi tanpa perlu login.
-2. Untuk keperluan lampiran screenshot pada submission, ambil **screenshot full-page** dashboard tersebut (gunakan menu **File → Download → PDF** di Looker Studio untuk hasil rapi, atau screenshot manual), lalu simpan dengan format nama **`<username_dicoding>-dashboard.png`**.
 
 **Sumber data dashboard:** `looker_dashboard_data.csv` — berisi data mahasiswa yang sudah dilengkapi label kategorikal (Scholarship_Label, Tuition_Label, Debtor_Label, Gender_Label) dan pengelompokan (bin) untuk SKS lulus semester 2, nilai semester 2, serta kelompok usia, sehingga siap langsung dipakai sebagai dimension/metric di Looker Studio tanpa perlu formula tambahan.
 
 **Alternatif/cadangan:**
-- File standalone `dashboard/dashboard.html` turut disertakan dan dapat dibuka langsung di browser tanpa server (double-click file-nya).
-- Halaman `pages/1_📊_Dashboard.py` juga tersedia sebagai dashboard versi Streamlit (dapat diakses melalui `https://projectdicoding.streamlit.app/Dashboard`) apabila dibutuhkan sebagai pembanding.
+- Tersedia sebagai dashboard versi Streamlit (dapat diakses melalui `https://projectdicoding.streamlit.app/Dashboard`) apabila dibutuhkan sebagai pembanding.
 
 ---
 
@@ -94,80 +88,25 @@ Prototype sistem machine learning (**terpisah dari dashboard di atas**) dibangun
 2. **📂 Prediksi Massal (Upload File)** — untuk memprediksi banyak mahasiswa sekaligus melalui upload CSV/Excel, lengkap dengan template kosong dan contoh data mahasiswa `Enrolled` yang bisa langsung dicoba, serta ringkasan jumlah mahasiswa per kategori risiko dan unduhan hasil prediksi.
 3. **📖 Panduan Penggunaan** — petunjuk langkah demi langkah cara memakai prototype (baik input manual maupun upload file), tabel ambang batas kategori risiko, serta tabel referensi kode kategorikal lengkap untuk keperluan upload file.
 
-**🔗 Link Prototype (akses remote, dapat diakses & divalidasi langsung oleh reviewer):**
-**`https://projectdicoding.streamlit.app/`**
-
 ### File pendukung yang dibutuhkan (sudah disertakan dalam submission ini)
 Seluruh file berikut wajib ada agar prototype dapat berjalan, baik secara lokal maupun saat deployment, dan **semuanya sudah tersedia di dalam folder submission ini** — reviewer tidak perlu mencari atau membuat file tambahan:
 
 | File | Fungsi |
 |---|---|
 | `app.py` | File utama aplikasi Streamlit (halaman prediksi) |
-| `pages/1_📊_Dashboard.py` | Halaman dashboard monitoring (lihat bagian Business Dashboard) |
 | `categories.py` | Mapping kode kategorikal → label yang mudah dibaca (dipakai oleh `app.py`) |
 | `model/model.joblib` | Model Random Forest Classifier yang sudah dilatih |
 | `model/scaler.joblib` | StandardScaler yang sudah di-fit pada data training |
 | `model/feature_names.joblib` | Daftar & urutan nama fitur yang menjadi input model |
 | `model/enrolled_students_for_prediction.csv` | Contoh dataset (794 mahasiswa `Enrolled`) untuk uji coba fitur Prediksi Massal |
-| `dashboard_stats.json` | Data ringkasan statistik untuk halaman dashboard |
 | `requirements.txt` | Daftar dependency Python beserta versinya |
 
-### Panduan Menjalankan Prototype secara Lokal (end-to-end)
-
-**Langkah 1 — Clone/unduh seluruh isi folder submission ini**, pastikan struktur foldernya seperti berikut (jangan ada file yang tertinggal):
-```
-proyek_akhir/
-├── app.py
-├── categories.py
-├── dashboard_stats.json
-├── requirements.txt
-├── notebook.ipynb
-├── pages/
-│   └── 1_📊_Dashboard.py
-├── model/
-│   ├── model.joblib
-│   ├── scaler.joblib
-│   ├── feature_names.joblib
-│   └── enrolled_students_for_prediction.csv
-└── dashboard/
-    └── dashboard.html
-```
-
-**Langkah 2 — Buat virtual environment (disarankan agar tidak bentrok dengan package lain):**
-```bash
-python -m venv venv
-source venv/bin/activate      # Windows: venv\Scripts\activate
-```
-
-**Langkah 3 — Install seluruh dependency:**
-```bash
-pip install -r requirements.txt
-```
-
-**Langkah 4 — Jalankan aplikasi Streamlit** (pastikan posisi terminal berada di dalam folder `proyek_akhir/`, sejajar dengan `app.py`):
-```bash
-streamlit run app.py
-```
-
-**Langkah 5 — Buka aplikasi.** Streamlit akan otomatis membuka browser pada `http://localhost:8501`. Jika tidak terbuka otomatis, salin URL tersebut dan buka manual di browser.
-
-**Langkah 6 — Uji coba prototype:**
-- Pada tab **🧍 Prediksi Individu**: isi form dan klik "Prediksi" untuk melihat hasil prediksi Dropout/Graduate satu mahasiswa.
-- Pada tab **📂 Prediksi Massal**: klik tombol **"Unduh Contoh Data Mahasiswa Aktif (Enrolled)"**, lalu upload kembali file tersebut ke uploader di bawahnya untuk melihat prediksi massal terhadap 794 mahasiswa sekaligus.
-- Buka halaman **📊 Dashboard** melalui menu sidebar (di kiri) untuk melihat visualisasi monitoring — halaman ini terpisah dari fitur prediksi.
 
 ### Mengakses Prototype secara Online (Streamlit Community Cloud)
 
 Prototype juga sudah di-deploy dan dapat diakses langsung tanpa instalasi apa pun melalui link berikut:
 
 **🔗 `https://projectdicoding.streamlit.app/`**
-
-Jika ingin men-deploy ulang sendiri:
-1. Push seluruh isi folder proyek ini (termasuk folder `model/`, `pages/`, `app.py`, `categories.py`, `dashboard_stats.json`, `requirements.txt`) ke repository GitHub. **Pastikan folder `model/` beserta 4 file di dalamnya benar-benar ter-commit** (bukan hanya sebagian).
-2. Buka [share.streamlit.io](https://share.streamlit.io/), login dengan akun GitHub.
-3. Klik **New app**, pilih repository dan branch, lalu set *Main file path* ke `app.py`.
-4. Klik **Deploy**. Streamlit Cloud akan otomatis mendeteksi folder `pages/` dan menambahkannya sebagai halaman terpisah (Dashboard) di sidebar.
-5. Setelah deploy selesai, uji ulang tab Prediksi Individu, Prediksi Massal, dan halaman Dashboard untuk memastikan semuanya berjalan baik sebelum link dibagikan ke reviewer.
 
 ---
 
